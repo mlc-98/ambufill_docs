@@ -185,8 +185,6 @@ Vehicles involved in an incident.
 | ------ | ---- | ------------------- | ----------- |
 | id     | uuid | `gen_random_uuid()` |             |
 | plate  | text |                     |             |
-#### 
-
 #### incidents
 Models incidents attended by emergency crews. Since multiple vehicles can be involved in the same incident, that relationship is represented by a junction table.
 
@@ -231,10 +229,25 @@ The same IPS worker can change their workplace over time. Thus, a junction table
 | ips_id       | uuid      |                     | fk -> `ips` <br>`not null`       |
 | created_at   | timestamp | `now()`             |                                  |
 #### soat_to_involved_vehicle
-| column               | type | default             | constraints                       |
-| -------------------- | ---- | ------------------- | --------------------------------- |
-| id                   | uuid | `gen_random_uuid()` |                                   |
-| soat_company_id      | uuid |                     | fk -> `soat_companies` `not null` |
-| soat_number          | text |                     | `not null`                        |
-| soat_expiration_date | date |                     | `not null`                        |
-| soat_picture_url     | text |                     | `not null` `unique`               |
+| column               | type      | default             | constraints                       |
+| -------------------- | --------- | ------------------- | --------------------------------- |
+| id                   | uuid      | `gen_random_uuid()` |                                   |
+| soat_company_id      | uuid      |                     | fk -> `soat_companies` `not null` |
+| soat_number          | text      |                     | `not null`                        |
+| soat_expiration_date | date      |                     | `not null`                        |
+| soat_picture_url     | text      |                     | `not null` `unique`               |
+| created_at           | timestamp | `now()`             |                                   |
+#### involved_vehicle_to_incident
+| column              | type      | default             | constraints                              |
+| ------------------- | --------- | ------------------- | ---------------------------------------- |
+| id                  | uuid      | `gen_random_uuid()` |                                          |
+| involved_vehicle_id | uuid      |                     | fk -> `involved_vehicles` <br>`not null` |
+| incident_id         | uuid      |                     | fk -> `incidents` <br>`not null`         |
+| created_at          | timestamp | `now()`             |                                          |
+#### ambulance_to_company
+| column       | type      | default             | constraints                       |
+| ------------ | --------- | ------------------- | --------------------------------- |
+| id           | uuid      | `gen_random_uuid()` |                                   |
+| ambulance_id | uuid      |                     | fk -> `ambulances` <br>`not null` |
+| company_id   | uuid      |                     | fk -> `companies` <br>`not null`  |
+| created_at   | timestamp | `now()`             |                                   |

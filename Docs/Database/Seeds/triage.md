@@ -4,5 +4,5 @@ INSERT INTO public.triage (urgency_level, color) VALUES
 (2, 'Naranja'),
 (3, 'Amarillo'),
 (4, 'Verde'),
-(4, 'Azul');
+(5, 'Azul');
 ```
